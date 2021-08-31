@@ -1,6 +1,4 @@
 /* global Handlebars, dataSource */
-/* global Handlebars, dataSource */
-
 export const utils = {}; // eslint-disable-line no-unused-vars
 
 utils.createDOMFromHTML = function(htmlString) {
@@ -79,4 +77,3 @@ utils.addDays = function(dateStr, days){
   return dateObj;
 };
 
-export default utils;
