@@ -1,5 +1,5 @@
 import { settings, select, classNames, templates } from '../settings.js';
-import { utils } from '../utils.js';
+import {utils} from '../utils.js';
 import CartProduct from './CartProduct.js';
 
 class Cart {
@@ -20,9 +20,7 @@ class Cart {
 
     thisCart.dom.wrapper = element;
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
-
     thisCart.dom.productList = element.querySelector(select.cart.productList);
-
     thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
     thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
     thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
@@ -83,7 +81,7 @@ class Cart {
       thisCart.totalNumber += productCart.amount;
       thisCart.subtotalPrice += productCart.price;
 
-      console.log('thisCart.products:', productCart);
+      // console.log('thisCart.products:', productCart);
     }
 
     if (thisCart.totalNumber === 0){
