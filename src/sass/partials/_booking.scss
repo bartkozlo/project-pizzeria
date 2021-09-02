@@ -169,6 +169,10 @@
         opacity: 0.4;
       }
     }
+
+    &.selected {
+      background-color: rgb(3, 252, 165);
+    }
   }
   
   [data-table="1"] {
