@@ -180,6 +180,78 @@ class Booking {
     thisBooking.dom.floorPlan = thisBooking.dom.wrapper.querySelector(
       select.booking.tables.split(' ')[0]
     );
+    thisBooking.dom.bookingForm = thisBooking.dom.wrapper.querySelector(
+      select.booking.form
+    );
+    thisBooking.dom.bookingForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      thisBooking.sendBooking();
+    });
+  }
+
+  sendBooking(){
+    const thisBooking = this;
+
+    thisBooking.dom.date = thisBooking.dom.wrapper.querySelector(
+      select.widgets.datePicker.input
+    );
+    thisBooking.dom.hour = thisBooking.dom.wrapper.querySelector(
+      select.widgets.hourPicker.input
+    );
+
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(
+      select.cart.phone
+    );
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(
+      select.cart.address
+    );
+
+    thisBooking.dom.startersOpitions = thisBooking.dom.wrapper.querySelectorAll(
+      select.booking.startersOpitions
+    );
+
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const payload = {
+      data: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: Number(thisBooking.slectedTable),
+      duration: thisBooking.hoursAmount.value,
+      ppl: thisBooking.peopleAmount.value,
+      starters: [],
+      phone: thisBooking.dom.phone.value,
+      address: thisBooking.dom.address.value,
+    };
+
+    for (let option of thisBooking.dom.startersOpitions){
+      if (option.checked){
+        payload.starters.push(option.defaultValue);
+      }
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (parsedResponse) {
+        console.log('parsedResponse', parsedResponse);
+      })
+      .then(
+        thisBooking.makeBooked(
+          payload.data,
+          payload.hour,
+          payload.duration,
+          payload.table
+        )
+      );
   }
 
   initWidgets() {
