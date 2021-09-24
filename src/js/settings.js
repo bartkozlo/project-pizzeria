@@ -3,7 +3,7 @@ export const select = {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
-    home: '#template-home', 
+    home: '#template-home',
   },
   containerOf: {
     menu: '#product-list',
@@ -27,7 +27,7 @@ export const select = {
   },
   widgets: {
     amount: {
-      input: 'input.amount', 
+      input: 'input.amount',
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
     },
@@ -98,7 +98,7 @@ export const settings = {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
-  }, 
+  },
   cart: {
     defaultDeliveryFee: 20,
   },

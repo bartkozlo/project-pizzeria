@@ -48,7 +48,7 @@ class Booking {
       eventsRepeat:  settings.db.url + '/' + settings.db.event
                                      + '?' + params.eventsRepeat.join('&'),
     };
-    
+
     // console.log('getData urls', urls);
 
     Promise.all([
@@ -60,7 +60,7 @@ class Booking {
         const bookingsResponse = allResponses[0];
         const eventsCurrentResponse = allResponses[1];
         const eventsRepeatsResponse = allResponses[2];
-        
+
         return Promise.all([
           bookingsResponse.json(),
           eventsCurrentResponse.json(),
@@ -114,7 +114,7 @@ class Booking {
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
       }
-  
+
       thisBooking.booked[date][hourBlock].push(table);
     }
   }
@@ -128,7 +128,7 @@ class Booking {
     let allAvailable = false;
 
     if(
-      typeof thisBooking.booked[thisBooking.date] == 'undefined' 
+      typeof thisBooking.booked[thisBooking.date] == 'undefined'
       ||
       typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
     ){
@@ -142,7 +142,7 @@ class Booking {
       }
 
       if(
-        !allAvailable 
+        !allAvailable
         &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){

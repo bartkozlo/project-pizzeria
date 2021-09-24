@@ -25,7 +25,7 @@ const app = {
       });
     }
   },
-  
+
   initPages: function(){
     const thisApp = this;
 
@@ -35,14 +35,14 @@ const app = {
     const idFromHash = window.location.hash.replace('#/', '');
 
     let pageMatchingHash = thisApp.pages[0].id;
-    
+
     for(let page of thisApp.pages) {
       if(page.id == idFromHash){
         pageMatchingHash = page.id;
         break;
       }
     }
-    
+
     thisApp.activatePage(pageMatchingHash);
 
     for(let link of thisApp.navLinks) {
@@ -65,7 +65,7 @@ const app = {
   activatePage: function(pageId){
     const thisApp = this;
 
-    //add class "active" to matching pages, remove from non-matching 
+    //add class "active" to matching pages, remove from non-matching
     for(let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
@@ -75,9 +75,9 @@ const app = {
         classNames.nav.active,
         link.getAttribute('href') == '#' + pageId
       );
-    } 
+    }
   },
-  
+
   initMenu: function(){
     const thisApp = this;
 
@@ -97,12 +97,12 @@ const app = {
         return rawResponse.json();
       })
       .then(function(parsedResponse){
-        
+
         thisApp.data.products = parsedResponse;
 
         thisApp.initMenu();
       });
-    
+
   },
 
   initBooking: function(){
@@ -127,7 +127,7 @@ const app = {
 
     const cartElem = document.querySelector(select.containerOf.cart);
     thisApp.cart = new Cart(cartElem);
-  
+
     thisApp.productList = document.querySelector(select.containerOf.menu);
 
     thisApp.productList.addEventListener('add-to-cart', function (event) {
