@@ -1,4 +1,4 @@
-class BaseWidget {
+export class BaseWidget {
   constructor(wrapperElement, initialValue) {
     const thisWidget = this;
 
@@ -43,16 +43,16 @@ class BaseWidget {
   renderValue(){
     const thisWidget = this;
 
-    thisWidget.dom.wrapper.innerHTML = thisWidget.value;   
+    thisWidget.dom.wrapper.innerHTML = thisWidget.value;
   }
 
   announce() {
     const thisWidget = this;
-      
+
     const event = new CustomEvent('updated', {
       bubbles: true
     });
-    
+
     thisWidget.dom.wrapper.dispatchEvent(event);
   }
 }

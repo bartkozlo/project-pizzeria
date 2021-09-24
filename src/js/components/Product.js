@@ -19,7 +19,7 @@ class Product{
   renderInMenu(){
     const thisProduct = this;
     const generatedHTML = templates.menuProduct(thisProduct.data);
-    
+
     thisProduct.element = utils.createDOMFromHTML(generatedHTML);
 
     const menuContainer = document.querySelector(select.containerOf.menu);
@@ -31,7 +31,7 @@ class Product{
     const thisProduct = this;
 
     thisProduct.dom = {};
-  
+
     thisProduct.dom.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
     thisProduct.dom.form = thisProduct.element.querySelector(select.menuProduct.form);
     thisProduct.dom.formInputs = thisProduct.dom.form.querySelectorAll(select.all.formInputs);
@@ -67,12 +67,12 @@ class Product{
       event.preventDefault();
       thisProduct.processOrder();
     });
-    
+
     for(let input of thisProduct.dom.formInputs){input.addEventListener('change', function(){
       thisProduct.processOrder();
     });
     }
-    
+
     thisProduct.dom.cartButton.addEventListener('click', function(event){
       event.preventDefault();
       thisProduct.processOrder();
@@ -128,14 +128,14 @@ class Product{
         }
       }
     }
-    
+
     thisProduct.priceSingle = price;
     price *= thisProduct.amountWidget.value;
     thisProduct.dom.priceElem.innerHTML = price;
   }
 
   addToCart(){
-    
+
     const thisProduct = this;
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
@@ -143,12 +143,12 @@ class Product{
         product: thisProduct.prepareCartProduct(),
       },
     });
-  
+
     thisProduct.element.dispatchEvent(event);
   }
 
   prepareCartProduct(){
-    
+
     const thisProduct = this;
     const productSummary = {};
 
@@ -164,32 +164,32 @@ class Product{
 
   prepareCartProductsParams() {
     const thisProduct = this;
-  
+
     const formData = utils.serializeFormToObject(thisProduct.dom.form);
     const params = {};
-  
+
     // for very category (param)
     for(let paramId in thisProduct.data.params) {
       const param = thisProduct.data.params[paramId];
-  
+
       // create category param in params const eg. params = { ingredients: { name: 'Ingredients', options: {}}}
       params[paramId] = {
         label: param.label,
         options: {}
       };
-  
+
       // for every option in this category
       for(let optionId in param.options) {
         const option = param.options[optionId];
         const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
-  
+
         if(optionSelected) {
           // option is selected!
           params[paramId].options[optionId] = option.label;
         }
       }
     }
-  
+
     return params;
   }
 }
